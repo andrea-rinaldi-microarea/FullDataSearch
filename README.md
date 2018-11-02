@@ -78,7 +78,7 @@ public ActionResult<List<MyTable>> GetAll()
 
 5. Testing the result
 
-Compile and run. Open a browser and navigate to `http://localhost:5000/api/MyTable`.
+Compile and run. Open a browser and navigate to `http://localhost:5000/api/mytable`.
 
 You should get the list of data in your table.
 
@@ -90,4 +90,103 @@ Scaffold a new Angular app and open it with VS Code:
 ```
 ng new MyClient
 code MyClient
+```
+Add Bootstrap support for better styiling the app. In a Terminal window give the following command:
+```
+npm install bootstrap
+```
+Change the `styles.css` file including the Bootstrap css:
+```css
+@import "~bootstrap/dist/css/bootstrap.css";
+```
+2. create a service to get the data
+
+Scaffold a service which will require the data from the service:
+```
+ng generate service services/MyTable --no-spec
+```
+Add the Angular HTTP module in the `app.module.ts` file:
+```typescript
+import { HttpClientModule } from '@angular/common/http';
+...
+  imports: [
+...
+    HttpClientModule,
+  ],
+```
+Change the content of `MyTable.service.ts` in this way:
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable()
+export class MyTableService {
+  data: [];
+  constructor(private http: HttpClient) { }
+
+  public GetAllData() {
+    this.http.get('http://localhost:5000/api/mytable').subscribe((data:any) => {
+      this.data = data;
+    },
+    (error:any) => {
+      console.log(error);
+    });
+  }
+}
+```
+Add your service in those injectable by Angular, in the `app.module.ts` file set:
+```
+...
+providers: [MyTableService],
+...
+```
+3. create a view for the data
+
+Scaffold a new component which will contain the data returned by the service:
+```
+ng generate component UI\MyTableList --no-spec
+```
+Replace all of the `app.component.html` code with the following:
+```html
+<div class="container">
+  <app-my-table-list></app-my-table-list>
+</div>
+
+```
+Prepare the component to visualize the data, replace `my-table-list.component.ts` content with:
+```typescript
+import { MyTableService } from './../../services/my-table.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-my-table-list',
+  templateUrl: './my-table-list.component.html',
+  styleUrls: ['./my-table-list.component.css']
+})
+export class MyTableListComponent {
+
+  constructor(private myTableService: MyTableService) { }
+
+  onShow() {
+    this.myTableService.GetAllData();
+  }
+}
+```
+Set then the layout in `my-table-list.component.html` to something like this:
+```html
+<div class="row">
+  <button class="btn btn-primary" (click)="OnShow()">Show Data</button>
+</div>
+<div class="row">
+  <table class="table table-responsive">
+    <tr>
+      <th>column 1</th>
+      <th>column 2</th>
+    </tr>
+    <tr *ngFor="let d of myTableService.data">
+        <td>{{d.column1}}</td>
+        <td>{{d.column2}}</td>
+    </tr> 
+  </table>
+</div>
 ```
