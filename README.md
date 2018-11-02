@@ -81,3 +81,13 @@ public ActionResult<List<MyTable>> GetAll()
 Compile and run. Open a browser and navigate to `http://localhost:5000/api/MyTable`.
 
 You should get the list of data in your table.
+
+## Create an Angular client
+To create an Angular app which access the service, do as follow.
+1. create the app
+
+Scaffold a new Angular app and open it with VS Code:
+```
+ng new MyClient
+code MyClient
+```
