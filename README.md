@@ -6,13 +6,36 @@ We use the "Database First" approach.
 
 To create an ASP.NET Core service which use Entity Framework for SQL Server:
 
-1. create the project
+### Create the project
 
 `dotnet new webapi -o MyService`
 
 open the folder with VS Code: `code MyService`.
 
-2. from VS Code open a terminal and add the Microsoft SQL Server database provider for Entity Framework Core to the project
+CORS (Cross Origin Resource Sharing) must be enabled as we want to access this service from a separated Angular app. To enable it you must add a reference to the ASPNet Core CORS package:
+```
+dotnet add package Microsoft.AspNetCore.Cors --version 2.1.1
+```
+Then enable it in the service, change your `Startup.cs` in this way:
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+...
+    services.AddCors();
+...
+}
+...
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+...
+    app.UseCors( options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader() );
+...
+}
+```
+Please note that the only origin allowed is those the Angular app is supposed will run.
+
+### Add Entity Framework support 
+From VS Code open a terminal and add the Microsoft SQL Server database provider for Entity Framework Core to the project
 
 `dotnet add package Microsoft.EntityFrameworkCore.SqlServer`
 
@@ -20,6 +43,8 @@ accept the restore command offered by VS Code.
 Remove the useless reference to the Razor package in the .csproj
 In Startup.cs comment out the `UseHttpsRedirection` in the `Configure` method
 In "Debug | Open Configurations" set to `false` the `enabled` property of the `launchBrowser` group.
+
+
 
 3. Scaffold a DB Context
 
