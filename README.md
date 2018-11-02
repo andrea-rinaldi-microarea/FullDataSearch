@@ -192,7 +192,7 @@ export class MyTableListComponent {
 Set then the layout in `my-table-list.component.html` to something like this:
 ```html
 <div class="row">
-  <button class="btn btn-primary" (click)="OnShow()">Show Data</button>
+  <button class="btn btn-primary" (click)="onShow()">Show Data</button>
 </div>
 <div class="row">
   <table class="table table-responsive">
@@ -207,3 +207,9 @@ Set then the layout in `my-table-list.component.html` to something like this:
   </table>
 </div>
 ```
+### Test the result
+Run the Angular app:
+```
+ng serve
+```
+Check that the previously created service is still running. By clicking on the button, the data from your table should show up.
