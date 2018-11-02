@@ -1,7 +1,7 @@
 # FullDataSearch
 ## Create a ASP.NET Core service
 In VS Code installs the ["C# for Visual Studio Code"](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) plugin.
-Check you have isntalled the Entity Framework tools by testing the command `dotnet ef`.
+Check you have installed the Entity Framework tools by testing the command `dotnet ef`.
 We use the "Database First" approach.
 
 To create an ASP.NET Core service which use Entity Framework for SQL Server:
@@ -68,7 +68,7 @@ namespace SampleData.Controllers
 }
 ```
 add a get method to the controller whch returns all of your data
-```
+```csharp
 [HttpGet]
 public ActionResult<List<MyTable>> GetAll()
 {
