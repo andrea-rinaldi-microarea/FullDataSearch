@@ -27,7 +27,8 @@ namespace SampleData
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           services.AddDbContext<Mago4Context>(
+            services.AddCors();            
+            services.AddDbContext<Mago4Context>(
                 opt => opt.UseSqlServer("Server=USR-RINALDIAND4;Database=Mago4Demo;User Id=sa;Password=Microarea.;")
             );
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -45,6 +46,7 @@ namespace SampleData
                 app.UseHsts();
             }
 
+            app.UseCors( options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader() );
             // app.UseHttpsRedirection();
             app.UseMvc();
         }

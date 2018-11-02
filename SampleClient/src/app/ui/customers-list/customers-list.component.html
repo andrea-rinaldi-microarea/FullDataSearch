@@ -1,0 +1,17 @@
+<div class="row">
+  <button class="btn btn-primary" (click)="onShow()">Show Customers</button>
+</div>
+<div class="row">
+  <table class="table table-responsive">
+    <tr>
+      <th>Code</th>
+      <th>Company Name</th>
+      <th>Address</th>
+    </tr>
+    <tr *ngFor="let c of customersService.data">
+        <td>{{c.custSupp}}</td>
+        <td>{{c.companyName}}</td>
+        <td>{{c.address}}</td>
+    </tr> 
+  </table>
+</div>
