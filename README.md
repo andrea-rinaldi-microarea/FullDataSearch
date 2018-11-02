@@ -44,10 +44,7 @@ Remove the useless reference to the Razor package in the .csproj
 In Startup.cs comment out the `UseHttpsRedirection` in the `Configure` method
 In "Debug | Open Configurations" set to `false` the `enabled` property of the `launchBrowser` group.
 
-
-
-3. Scaffold a DB Context
-
+### Scaffold a DB Context
 From the terminal launch the following command
 
 `dotnet ef dbcontext scaffold "Server=MyServer;Database=MyDB;User Id=MyUser;Password=MyPwd;" Microsoft.EntityFrameworkCore.SqlServer -o Models -t MyTable`
@@ -67,9 +64,8 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-4. Create a controller
-
-in the `Controllers` folder add a file named `MyTableController.cs` with the following content:
+### Create a controller
+In the `Controllers` folder add a file named `MyTableController.cs` with the following content:
 
 ```csharp
 using Microsoft.AspNetCore.Mvc;
@@ -101,16 +97,14 @@ public ActionResult<List<MyTable>> GetAll()
 }
 ```
 
-5. Testing the result
-
+### Testing the result
 Compile and run. Open a browser and navigate to `http://localhost:5000/api/mytable`.
 
 You should get the list of data in your table.
 
 ## Create an Angular client
 To create an Angular app which access the service, do as follow.
-1. create the app
-
+### Create the app
 Scaffold a new Angular app and open it with VS Code:
 ```
 ng new MyClient
@@ -124,8 +118,7 @@ Change the `styles.css` file including the Bootstrap css:
 ```css
 @import "~bootstrap/dist/css/bootstrap.css";
 ```
-2. create a service to get the data
-
+### Create a service to get the data
 Scaffold a service which will require the data from the service:
 ```
 ng generate service services/MyTable --no-spec
@@ -165,8 +158,7 @@ Add your service in those injectable by Angular, in the `app.module.ts` file set
 providers: [MyTableService],
 ...
 ```
-3. create a view for the data
-
+### Create a view for the data
 Scaffold a new component which will contain the data returned by the service:
 ```
 ng generate component UI\MyTableList --no-spec
