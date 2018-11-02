@@ -1,7 +1,5 @@
 # equivalenti, autenticazione con login e pwd
 
-dotnet ef dbcontext scaffold "Server=USR-RINALDIAND4;Database=Mago4Demo;User Id=sa;Password=Microarea.;" 
-    Microsoft.EntityFrameworkCore.SqlServer -o Models -t MA_SalesPeople
+dotnet ef dbcontext scaffold "Server=USR-RINALDIAND4;Database=Mago4Demo;User Id=sa;Password=Microarea.;" Microsoft.EntityFrameworkCore.SqlServer -o Models -t MA_SalesPeople
 
-dotnet ef dbcontext scaffold "Data Source=USR-RINALDIAND4;Initial Catalog=Mago4Demo;User Id=sa;Password=Microarea.;" 
-    Microsoft.EntityFrameworkCore.SqlServer -o Models -t MA_SalesPeople
+dotnet ef dbcontext scaffold "Data Source=USR-RINALDIAND4;Initial Catalog=Mago4Demo;User Id=sa;Password=Microarea.;" Microsoft.EntityFrameworkCore.SqlServer -o Models -t MA_SalesPeople
