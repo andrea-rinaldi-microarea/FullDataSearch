@@ -23,6 +23,7 @@ public void ConfigureServices(IServiceCollection services)
 ...
     // add BEFORE Mvc
     services.AddCors();
+    //
     services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 ...
 }
@@ -32,6 +33,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ...
     // add BEFORE Mvc
     app.UseCors( options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader() );
+    //
     app.UseMvc();
 ...
 }
