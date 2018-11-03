@@ -10,7 +10,7 @@ export class CustomersService {
   constructor(private http: HttpClient) { }
 
   public GetAllData() {
-    this.http.get('http://localhost:5000/api/customers').subscribe((data:any) => {
+    this.http.get('http://localhost:5100/api/customers').subscribe((data:any) => {
       this.data = data;
     },
     (error:any) => {
