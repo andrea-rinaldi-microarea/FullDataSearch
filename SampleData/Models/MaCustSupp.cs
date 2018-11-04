@@ -123,10 +123,10 @@ namespace SampleData.Models
         public string FdtitleCode { get; set; }
         public string SendByCertifiedEmail { get; set; }
         public string OmniasubAccount { get; set; }
-        public string PrintedInKepyo { get; set; }
-        public string PublicSector { get; set; }
-        public string Profession { get; set; }
-        public string SubmissionExcluded { get; set; }
+        // public string PrintedInKepyo { get; set; }
+        // public string PublicSector { get; set; }
+        // public string Profession { get; set; }
+        // public string SubmissionExcluded { get; set; }
         public DateTime Tbcreated { get; set; }
         public DateTime Tbmodified { get; set; }
         public int TbcreatedId { get; set; }

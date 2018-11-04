@@ -15,14 +15,14 @@ namespace SampleData.Models
 
         public virtual DbSet<MaCustSupp> MaCustSupp { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=USR-RINALDIAND4;Database=Mago4Demo;User Id=sa;Password=Microarea.;");
-            }
-        }
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     if (!optionsBuilder.IsConfigured)
+        //     {
+        //         optionsBuilder.UseSqlServer("Server=MARAUDER/MARAUDER;Database=m4Test;User Id=sa;Password=Microarea.;");
+        //         //optionsBuilder.UseSqlServer("Server=USR-RINALDIAND4;Database=Mago4Demo;User Id=sa;Password=Microarea.;");
+        //     }
+        // }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -524,10 +524,10 @@ namespace SampleData.Models
                     .IsUnicode(false)
                     .HasDefaultValueSql("('')");
 
-                entity.Property(e => e.PrintedInKepyo)
-                    .HasMaxLength(1)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('1')");
+                // entity.Property(e => e.PrintedInKepyo)
+                //     .HasMaxLength(1)
+                //     .IsUnicode(false)
+                //     .HasDefaultValueSql("('1')");
 
                 entity.Property(e => e.PrivacyStatement)
                     .HasMaxLength(1)
@@ -538,15 +538,15 @@ namespace SampleData.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("('17991231')");
 
-                entity.Property(e => e.Profession)
-                    .HasMaxLength(15)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('')");
+                // entity.Property(e => e.Profession)
+                //     .HasMaxLength(15)
+                //     .IsUnicode(false)
+                //     .HasDefaultValueSql("('')");
 
-                entity.Property(e => e.PublicSector)
-                    .HasMaxLength(1)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('0')");
+                // entity.Property(e => e.PublicSector)
+                //     .HasMaxLength(1)
+                //     .IsUnicode(false)
+                //     .HasDefaultValueSql("('0')");
 
                 entity.Property(e => e.PymtAccount)
                     .HasMaxLength(16)
@@ -595,10 +595,10 @@ namespace SampleData.Models
                     .IsUnicode(false)
                     .HasDefaultValueSql("('')");
 
-                entity.Property(e => e.SubmissionExcluded)
-                    .HasMaxLength(1)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('0')");
+                // entity.Property(e => e.SubmissionExcluded)
+                //     .HasMaxLength(1)
+                //     .IsUnicode(false)
+                //     .HasDefaultValueSql("('0')");
 
                 entity.Property(e => e.Suframa)
                     .HasColumnName("SUFRAMA")
