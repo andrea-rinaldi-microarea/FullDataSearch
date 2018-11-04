@@ -10,6 +10,7 @@ import { HeaderComponent } from './ui/header/header.component';
 import { FooterComponent } from './ui/footer/footer.component';
 import { SearchComponent } from './ui/search/search.component';
 import { IndexService } from './services/index.service';
+import { StatsComponent } from './ui/stats/stats.component';
 
 const ROUTES = [
   {
@@ -24,6 +25,10 @@ const ROUTES = [
   {
     path: 'search',
     component: SearchComponent
+  },
+  {
+    path: 'stats',
+    component: StatsComponent
   }
 ];
 
@@ -33,7 +38,8 @@ const ROUTES = [
     CustomersListComponent,
     HeaderComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,

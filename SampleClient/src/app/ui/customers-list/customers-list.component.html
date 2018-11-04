@@ -3,7 +3,7 @@
     <button class="btn btn-primary" (click)="onShow()">Download Customers</button>
   </div>
   <div class="col">
-      <button class="btn btn-normal float-right" (click)="onAddIndex()">Add to index</button>
+      <button class="btn btn-normal float-right" (click)="onBuildIndex()">Build entire index</button>
   </div>
 </div>
 <div class="row">
@@ -17,6 +17,7 @@
         <td>{{c.custSupp}}</td>
         <td>{{c.companyName}}</td>
         <td>{{c.address}}</td>
+        <td> <button class="btn btn-normal" (click)="onAddIndex(c)"><i class="fa fa-hand-pointer-o"></i></button></td>
     </tr> 
   </table>
 </div>
