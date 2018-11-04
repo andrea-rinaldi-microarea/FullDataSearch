@@ -22,7 +22,13 @@ export class CustomersListComponent {
   onAddIndex() {
     if (this.customersService.data.length > 0) {
       var cust = this.customersService.data[0];
-      this.indexService.Add({reference: cust.custSupp, context: cust.companyName, sentences: [cust.companyName, cust.address]})
+      this.indexService.Add({
+        reference: cust.tbguid, 
+        context: 'Customer ' + cust.custSupp + ' ' + cust.companyName, 
+        sentences: [
+          cust.companyName, 
+          cust.address
+        ]})
     }
   }
 }
