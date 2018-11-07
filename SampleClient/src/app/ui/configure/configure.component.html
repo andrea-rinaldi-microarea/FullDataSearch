@@ -1,0 +1,9 @@
+<form>
+  <h3>Configure DB Access</h3>
+  <div class="form-group col-8">
+    <label for="description">Connection string</label>
+    <input type="text" class="form-control" id="connectionString" aria-describedby="Connection String" placeholder="set your connection string" [(ngModel)]="connectionString" name="connectionString">
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!connectionString" (click)="onSave()">Save</button>
+  <button class="btn btn-normal" (click)="onBack()">Back</button>
+</form>

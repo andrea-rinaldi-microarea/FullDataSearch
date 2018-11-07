@@ -3,6 +3,7 @@ import { CustomersService } from './../../services/customers.service';
 import { Component, OnInit } from '@angular/core';
 import { IndexRequest } from '../../models/index-request';
 import { forEach } from '@angular/router/src/utils/collection';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers-list',
@@ -13,7 +14,8 @@ export class CustomersListComponent {
 
   constructor(
     private customersService: CustomersService,
-    private indexService: IndexService
+    private indexService: IndexService,
+    private router: Router
   ) { }
 
   onShow() {
@@ -37,5 +39,9 @@ export class CustomersListComponent {
     this.customersService.data.forEach(cust => {
       this.onAddIndex(cust);
     });
+  }
+
+  onConfigure() {
+    this.router.navigateByUrl('/configure');
   }
 }

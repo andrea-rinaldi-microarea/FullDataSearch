@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CustomersListComponent } from './ui/customers-list/customers-list.component';
@@ -11,6 +12,7 @@ import { FooterComponent } from './ui/footer/footer.component';
 import { SearchComponent } from './ui/search/search.component';
 import { IndexService } from './services/index.service';
 import { StatsComponent } from './ui/stats/stats.component';
+import { ConfigureComponent } from './ui/configure/configure.component';
 
 const ROUTES = [
   {
@@ -29,6 +31,10 @@ const ROUTES = [
   {
     path: 'stats',
     component: StatsComponent
+  },
+  {
+    path: 'configure',
+    component: ConfigureComponent
   }
 ];
 
@@ -39,12 +45,14 @@ const ROUTES = [
     HeaderComponent,
     FooterComponent,
     SearchComponent,
-    StatsComponent
+    StatsComponent,
+    ConfigureComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    FormsModule
   ],
   providers: [CustomersService, IndexService],
   bootstrap: [AppComponent]
