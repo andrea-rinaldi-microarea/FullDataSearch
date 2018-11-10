@@ -2,15 +2,15 @@ using System;
 
 namespace FullDataSearch.Models
 {
-        public class Bookmark
+    public class Bookmark
     {
-        public Guid Reference { get; set; }
-        public string Context { get; set; }
+        public Entity Entity { get; set; }
+        public TextData Context { get; set; }
 
-        public Bookmark(string context, Guid reference)
+        public Bookmark(Entity entity, TextData context)
         {
+            Entity = entity;
             Context = context;
-            Reference = reference;
         }
     }
 

@@ -2,8 +2,7 @@ import { DbConnectionStringService } from './../../services/db-connection-string
 import { IndexService } from './../../services/index.service';
 import { CustomersService } from './../../services/customers.service';
 import { Component, OnInit } from '@angular/core';
-import { IndexRequest } from '../../models/index-request';
-import { forEach } from '@angular/router/src/utils/collection';
+import { IndexRequest, Entity, TextData } from '../../models/index-request';
 import { Router } from '@angular/router';
 
 @Component({
@@ -35,13 +34,20 @@ export class CustomersListComponent implements OnInit {
   }
 
   onAddIndex(cust) {
-    this.indexService.Add({
-      reference: cust.tbguid, 
-      context: 'Customer ' + cust.custSupp + ' ' + cust.companyName, 
-      sentences: [
-        cust.companyName, 
-        cust.address
-      ]})
+    var ir = new IndexRequest();
+    ir.entity = new Entity(
+      'ERP.CustSupp.Documents.Customer', 
+      cust.tbguid,
+      'Customer', 
+      cust.custSupp + ' ' + cust.companyName
+    );
+    ir.textData.push(new TextData('Company name', cust.companyName));
+    ir.textData.push(new TextData('Address', cust.address));
+    ir.textData.push(new TextData('City', cust.city));
+    ir.textData.push(new TextData('Contact Person', cust.contactPerson));
+    ir.textData.push(new TextData('Notes', cust.notes));
+    
+    this.indexService.Add(ir);
   }
 
   onBuildIndex() {

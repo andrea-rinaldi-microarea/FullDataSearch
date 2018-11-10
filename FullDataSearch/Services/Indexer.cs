@@ -15,10 +15,11 @@ namespace FullDataSearch.Services
         HashSet<string> terms = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase); //TODO culture ...;
         public void Add(IndexRequest request)
         {
-            Bookmark bm = new Bookmark(request.Context, request.Reference);
-
-            foreach (string sentence in request.Sentences) {
-                InsertText(sentence, bm);
+            foreach (TextData text in request.TextData) {
+                if (text.Value == string.Empty)
+                    continue;
+                
+                InsertText(text.Value, new Bookmark(request.Entity, text));
             }
         }
         public HashSet<string> IndexedTerms()

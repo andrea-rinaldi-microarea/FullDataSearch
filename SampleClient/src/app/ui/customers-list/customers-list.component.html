@@ -18,11 +18,17 @@
       <th>Code</th>
       <th>Company Name</th>
       <th>Address</th>
+      <th>City</th>
+      <th>Contact Person</th>
+      <th>Notes</th>
     </tr>
     <tr *ngFor="let c of customersService.data">
         <td>{{c.custSupp}}</td>
         <td>{{c.companyName}}</td>
         <td>{{c.address}}</td>
+        <td>{{c.city}}</td>
+        <td>{{c.contactPerson}}</td>
+        <td>{{c.notes}}</td>
         <td> <button class="btn btn-normal" (click)="onAddIndex(c)"><i class="fa fa-hand-pointer-o"></i></button></td>
     </tr> 
   </table>
