@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using SampleData.Models;
+using System;
 
 namespace SampleData.Controllers
 {
@@ -19,7 +20,19 @@ namespace SampleData.Controllers
         [HttpGet]
         public ActionResult<List<MaCustSupp>> GetAll()
         {
-            return _context.MaCustSupp.Where(cs => cs.CustSuppType == 3211264).ToList();
+            try
+            {
+                if (!_context.IsValid())
+                    throw new InvalidOperationException("The DB connection is not properly set.");
+
+                return _context.MaCustSupp.Where(cs => cs.CustSuppType == 3211264).ToList();
+            }
+            catch (Exception e)
+            {
+                ContentResult err = Content(e.Message);
+                err.StatusCode = 500;
+                return err;
+            }
         }
 
     }

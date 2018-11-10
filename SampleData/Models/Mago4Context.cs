@@ -1,28 +1,35 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SampleData.Services;
 
 namespace SampleData.Models
 {
     public partial class Mago4Context : DbContext
     {
+        private DBConnectionString _dbConnectionString;
+
         public Mago4Context()
         {
         }
 
-        public Mago4Context(DbContextOptions<Mago4Context> options)
+        public Mago4Context(
+            DbContextOptions<Mago4Context> options,
+            DBConnectionString connectionString
+        )
             : base(options)
         {
+            _dbConnectionString = connectionString;
         }
 
         public virtual DbSet<MaCustSupp> MaCustSupp { get; set; }
 
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     if (!optionsBuilder.IsConfigured)
-        //     {
-        //         optionsBuilder.UseSqlServer("Server=MARAUDER/MARAUDER;Database=m4Test;User Id=sa;Password=Microarea.;");
-        //         //optionsBuilder.UseSqlServer("Server=USR-RINALDIAND4;Database=Mago4Demo;User Id=sa;Password=Microarea.;");
-        //     }
-        // }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_dbConnectionString.Get());
+        }
+
+        public bool IsValid() {
+            return _dbConnectionString.IsValid();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

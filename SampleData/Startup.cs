@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SampleData.Models;
+using SampleData.Services;
 
 namespace SampleData
 {
@@ -28,8 +29,9 @@ namespace SampleData
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();            
+            services.AddSingleton<DBConnectionString>();
             services.AddDbContext<Mago4Context>(
-                opt => opt.UseSqlServer("Server=MARAUDER\\MARAUDER;Database=m4Test;User Id=sa;Password=Microarea.;")
+                // opt => opt.UseSqlServer("Server=MARAUDER\\MARAUDER;Database=m4Test;User Id=sa;Password=Microarea.;")
                 // opt => opt.UseSqlServer("Server=USR-RINALDIAND4;Database=Mago4Demo;User Id=sa;Password=Microarea.;")
             );
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
