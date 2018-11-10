@@ -1,3 +1,4 @@
+import { DbConnectionStringService } from './services/db-connection-string.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -54,7 +55,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     FormsModule
   ],
-  providers: [CustomersService, IndexService],
+  providers: [CustomersService, IndexService, DbConnectionStringService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

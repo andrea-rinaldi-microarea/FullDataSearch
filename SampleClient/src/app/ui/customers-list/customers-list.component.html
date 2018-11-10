@@ -1,11 +1,12 @@
 <div class="row mb-2">
   <div class="col">
-    <button class="btn btn-normal float-right" (click)="onConfigure()">Configure</button>
+    <button class="btn btn-normal float-right" (click)="onConfigure()" name="onConfigure">Configure</button>
+    <label class="float-right mr-4" for="onConfigure" [hidden]="isValidConnection">Your DB connection is not configured.</label>
   </div>
 </div>
 <div class="row mb-2">
   <div class="col">
-    <button class="btn btn-primary" (click)="onShow()">Download Customers</button>
+    <button class="btn btn-primary" [disabled]="!isValidConnection" (click)="onShow()">Download Customers</button>
   </div>
   <div class="col">
       <button class="btn btn-normal float-right" (click)="onBuildIndex()">Build entire index</button>

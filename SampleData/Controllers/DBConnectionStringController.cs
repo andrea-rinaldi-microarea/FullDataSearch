@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,13 @@ namespace SampleData.Controllers
         }
 
         // GET api/dbconnectionstring
+        [HttpGet("isValid")]
+        public ActionResult<bool> IsValid()
+        {
+            return _dbconnectionstring.IsValid();
+        }
+
+        // GET api/dbconnectionstring
         [HttpGet]
         public ActionResult<string> Get()
         {
@@ -27,9 +35,16 @@ namespace SampleData.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post()
         {
-            _dbconnectionstring.Set(value);
+            using (var reader = new StreamReader(Request.Body))
+            {
+                var newConnectionString = reader.ReadToEnd();
+        
+                _dbconnectionstring.Set(newConnectionString);
+            }
+
+            return NoContent();
         }
     }
 }

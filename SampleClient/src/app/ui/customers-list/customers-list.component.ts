@@ -1,3 +1,4 @@
+import { DbConnectionStringService } from './../../services/db-connection-string.service';
 import { IndexService } from './../../services/index.service';
 import { CustomersService } from './../../services/customers.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,15 +11,26 @@ import { Router } from '@angular/router';
   templateUrl: './customers-list.component.html',
   styleUrls: ['./customers-list.component.css']
 })
-export class CustomersListComponent {
+export class CustomersListComponent implements OnInit {
+
+  private isValidConnection: boolean = false;
 
   constructor(
     private customersService: CustomersService,
     private indexService: IndexService,
-    private router: Router
+    private router: Router,
+    private dbConn: DbConnectionStringService
   ) { }
 
+  ngOnInit() {
+    this.dbConn.IsValid().subscribe( (isValid) => {
+      this.isValidConnection = isValid;
+    });
+  }
+
   onShow() {
+    if (!this.isValidConnection)
+      return;
     this.customersService.GetAllData();
   }
 
