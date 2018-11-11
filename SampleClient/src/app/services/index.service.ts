@@ -9,15 +9,21 @@ export class IndexService {
 
   constructor(private http: HttpClient) { }
 
-  public Add(request: IndexRequest) {
-      this.http.post(API_URL+"/add", request).subscribe(
-      res => {
-        console.log(res);
-      },
-      (error:any) => {
-        console.log(error);
-      }
-    );      
+  public Add(request: IndexRequest): Observable<any> {
+      var add$ = new Observable<any>( (observer) => {
+        this.http.post(API_URL+"/add", request).subscribe(
+          res => {
+            console.log(res);
+            observer.next(res);
+            observer.complete();
+          },
+          (error:any) => {
+            console.log(error);
+            observer.error(error);
+          }
+        );
+      });
+    return add$;      
   }
  
   public GetTerms(): Observable<string[]> {

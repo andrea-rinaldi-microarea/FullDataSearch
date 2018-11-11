@@ -4,6 +4,7 @@ import { CustomersService } from './../../services/customers.service';
 import { Component, OnInit } from '@angular/core';
 import { IndexRequest, Entity, TextData } from '../../models/index-request';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-customers-list',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class CustomersListComponent implements OnInit {
 
   private isValidConnection: boolean = false;
+  private indexInProgress = null;
 
   constructor(
     private customersService: CustomersService,
@@ -33,7 +35,7 @@ export class CustomersListComponent implements OnInit {
     this.customersService.GetAllData();
   }
 
-  onAddIndex(cust) {
+  addIndex(cust): Observable<any> {
     var ir = new IndexRequest();
     ir.entity = new Entity(
       'ERP.CustSupp.Documents.Customer', 
@@ -47,16 +49,27 @@ export class CustomersListComponent implements OnInit {
     ir.textData.push(new TextData('Contact Person', cust.contactPerson));
     ir.textData.push(new TextData('Notes', cust.notes));
     
-    this.indexService.Add(ir);
+    return this.indexService.Add(ir);
+  }
+
+  onAddIndex(cust) {
+    this.addIndex(cust);
   }
 
   onBuildIndex() {
     if (!this.customersService.data || this.customersService.data.length == 0) 
       return;
 
-    this.customersService.data.forEach(cust => {
-      this.onAddIndex(cust);
-    });
+    let build$ = this.customersService.data.map( cust => {
+      return this.addIndex(cust);
+    })
+    let count = 0;
+    Observable.merge(...build$).subscribe(() => {
+      this.indexInProgress = "Building index: entity " + ++count + " of " + this.customersService.data.length;
+    }, null, 
+    () => {
+      this.indexInProgress = null;
+    })
   }
 
   onConfigure() {

@@ -22,7 +22,7 @@ export class StatsComponent implements OnInit {
       this.terms = terms;
       this.maxLength = 0;
       this.terms.forEach( term => {
-        if (term.length > this.maxLength)
+       if (term.length > this.maxLength)
           this.maxLength = term.length;
       });
     })

@@ -37,7 +37,12 @@ namespace FullDataSearch.Services
                 if (word.Length < 2)
                     continue;
                 if (!terms.Contains(word))
-                    terms.Add(word);
+                {
+                    lock(terms)
+                    {
+                        terms.Add(word);
+                    } 
+                }
                 //trie.Insert(word, bm);
             }
         }
