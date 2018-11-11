@@ -9,8 +9,8 @@ namespace FullDataSearch.Controllers
     [ApiController]
     public class IndexController : ControllerBase
     {
-        IIndexer _indexer;
-        public IndexController(IIndexer indexer)
+        Indexer _indexer;
+        public IndexController(Indexer indexer)
         {
             _indexer = indexer;
         }
@@ -21,10 +21,17 @@ namespace FullDataSearch.Controllers
             _indexer.Add(request);
             return NoContent();
         }
+
         [HttpGet("terms")]
         public ActionResult<HashSet<string>> Terms()
         {
             return _indexer.IndexedTerms();
+        }
+
+        [HttpGet("nodes")]
+        public ActionResult<Node> GetNodes()
+        {
+            return _indexer.GetNodes();
         }
 
     }

@@ -2,9 +2,11 @@ import { DbConnectionStringService } from './../../services/db-connection-string
 import { IndexService } from './../../services/index.service';
 import { CustomersService } from './../../services/customers.service';
 import { Component, OnInit } from '@angular/core';
-import { IndexRequest, Entity, TextData } from '../../models/index-request';
+import { IndexRequest } from '../../models/index-request';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TextData } from '../../models/text-data';
+import { Entity } from '../../models/entity';
 
 @Component({
   selector: 'app-customers-list',
@@ -53,7 +55,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   onAddIndex(cust) {
-    this.addIndex(cust);
+    this.addIndex(cust).subscribe();
   }
 
   onBuildIndex() {
@@ -62,14 +64,15 @@ export class CustomersListComponent implements OnInit {
 
     let build$ = this.customersService.data.map( cust => {
       return this.addIndex(cust);
-    })
+    });
+
     let count = 0;
     Observable.merge(...build$).subscribe(() => {
-      this.indexInProgress = "Building index: entity " + ++count + " of " + this.customersService.data.length;
+      this.indexInProgress = "Building index: entity " + ++count + " of " + build$.length;
     }, null, 
     () => {
       this.indexInProgress = null;
-    })
+    });
   }
 
   onConfigure() {

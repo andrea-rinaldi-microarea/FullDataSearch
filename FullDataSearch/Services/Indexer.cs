@@ -1,18 +1,15 @@
 using System;
 using System.Collections.Generic;
 using FullDataSearch.Models;
+using Newtonsoft.Json;
 
 namespace FullDataSearch.Services
 {
-    public interface IIndexer
-    {
-        void Add(IndexRequest request);
-        HashSet<string> IndexedTerms();
-    }
-
-    public class Indexer : IIndexer
+    public class Indexer
     {
         HashSet<string> terms = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase); //TODO culture ...;
+        Trie trie = new Trie();
+
         public void Add(IndexRequest request)
         {
             foreach (TextData text in request.TextData) {
@@ -22,9 +19,32 @@ namespace FullDataSearch.Services
                 InsertText(text.Value, new Bookmark(request.Entity, text));
             }
         }
+
         public HashSet<string> IndexedTerms()
         {
             return terms;
+        }
+
+        public Node GetNodes()
+        {
+            Node root = new Node(trie.Root.Value.ToString());
+            addChildren(root, trie.Root);
+            var json = JsonConvert.SerializeObject(root);
+            return root;
+        }
+
+        private void addChildren(Node node, TrieNode trieNode)
+        {
+            foreach (Bookmark b in trieNode.Bookmarks)
+            {
+                node.Add(string.Format("[{0}-{1} ; {2}={3}]", b.Entity.Name, b.Entity.Description, b.Context.Context, b.Context.Value));
+            }
+
+            foreach (TrieNode tn in trieNode.Children)
+            {
+                Node n = node.Add(tn.Value.ToString());
+                addChildren(n, tn);
+            }
         }
 
         private void InsertText(string text, Bookmark bm)
@@ -43,9 +63,10 @@ namespace FullDataSearch.Services
                         terms.Add(word);
                     } 
                 }
-                //trie.Insert(word, bm);
+                trie.Insert(word, bm);
             }
         }
+
        private string[] CleanupAndSplit(string text)
         {
             text = text.Replace(".", "");

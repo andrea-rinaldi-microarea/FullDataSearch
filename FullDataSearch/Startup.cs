@@ -27,7 +27,7 @@ namespace FullDataSearch
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddSingleton<IIndexer, Indexer>();
+            services.AddSingleton<Indexer>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
