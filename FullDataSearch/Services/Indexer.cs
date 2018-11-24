@@ -63,7 +63,10 @@ namespace FullDataSearch.Services
                         terms.Add(word);
                     } 
                 }
-                trie.Insert(word, bm);
+                lock(trie)
+                {
+                    trie.Insert(word, bm);
+                }
             }
         }
 

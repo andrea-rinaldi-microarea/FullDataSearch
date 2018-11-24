@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { TreeviewModule } from 'ngx-treeview';
 
 import { AppComponent } from './app.component';
 import { CustomersListComponent } from './ui/customers-list/customers-list.component';
@@ -53,7 +54,8 @@ const ROUTES = [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    FormsModule,
+    TreeviewModule.forRoot()
   ],
   providers: [CustomersService, IndexService, DbConnectionStringService],
   bootstrap: [AppComponent]

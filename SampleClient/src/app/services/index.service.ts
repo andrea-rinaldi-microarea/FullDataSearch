@@ -42,4 +42,21 @@ export class IndexService {
 
     return terms$;
   }
+
+  public GetNodes(): Observable<any> {
+    var nodes$ = new Observable<any>( (observer) => {
+        this.http.get(API_URL+"/nodes").subscribe(
+          (data:any) => {
+            observer.next(data);
+            observer.complete();
+          },
+          (error:any) => {
+            console.log(error);
+            observer.error(error);
+          }
+        );      
+    });
+
+    return nodes$;
+  }
 }

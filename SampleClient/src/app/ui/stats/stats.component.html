@@ -1,20 +1,44 @@
-<div class="row mb-3">
-  <div class="col">
-    <button class="btn btn-primary" (click)="onTerms()">Terms statistics</button>
+<ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand" let-onCheckedChange="onCheckedChange">
+  <div class="form-inline row-item">
+    <i *ngIf="item.children" (click)="onCollapseExpand()" aria-hidden="true" class="fa" [class.fa-caret-right]="item.collapsed"
+      [class.fa-caret-down]="!item.collapsed"></i>
+    <label class="form-label" >{{ item.text }}</label>
+  </div>
+</ng-template>
+
+
+<div class="row">
+  <div class="col-6">
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="onTerms()">Terms statistics</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <label>total terms: {{terms.length}}</label>
+    </div>
+    <div class="col-6">
+      <label>max length: {{maxLength}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-responsive">
+      <tr *ngFor="let t of terms">
+          <td>{{t}}</td>
+      </tr> 
+    </table>
   </div>
 </div>
-<div class="row">
-  <div class="col-2">
-    <label>total terms: {{terms.length}}</label>
+<div class="col-6">
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="onTrie()">Trie structure</button>
+    </div>
   </div>
-  <div class="col-2">
-    <label>max length: {{maxLength}}</label>
+  <div class="row">
+    <ngx-treeview class="col-12" [items]="nodes" [config]="config" [itemTemplate]="itemTemplate"></ngx-treeview>    
   </div>
 </div>
-<div class="row">
-  <table class="table table-responsive">
-    <tr *ngFor="let t of terms">
-        <td>{{t}}</td>
-    </tr> 
-  </table>
+  
 </div>
