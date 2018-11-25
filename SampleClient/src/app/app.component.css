@@ -18,6 +18,7 @@ body {
 .fp-box .fp-row.fp-content {
   flex: 1 1 auto;
   overflow-y: auto;
+  height: 100%;
 }
 
 .fp-box .fp-row.fp-footer {

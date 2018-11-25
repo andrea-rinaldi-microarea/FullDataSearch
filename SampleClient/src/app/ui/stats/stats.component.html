@@ -7,8 +7,8 @@
 </ng-template>
 
 
-<div class="row">
-  <div class="col-6">
+<div class="row h-100" #host>
+  <div class="col-6 h-100">
   <div class="row mb-3">
     <div class="col">
       <button class="btn btn-primary" (click)="onTerms()">Terms statistics</button>
@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="row">
-    <table class="table table-responsive">
+    <table class="table table-responsive" #termsTbl>
       <tr *ngFor="let t of terms">
           <td>{{t}}</td>
       </tr> 
