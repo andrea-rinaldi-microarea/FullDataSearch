@@ -1,0 +1,25 @@
+/* to work properly, this must be set in the global styles.css*/
+/* html,
+body {
+  height: 100%;
+  margin: 0
+} */
+
+.fp-box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.fp-box .fp-row.fp-header {
+  flex: 0 1 auto;
+}
+
+.fp-box .fp-row.fp-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.fp-box .fp-row.fp-footer {
+  flex: 0 1 auto;
+}

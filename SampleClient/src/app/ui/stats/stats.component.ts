@@ -23,7 +23,6 @@ export class StatsComponent implements OnInit {
   constructor(private indexService: IndexService) { }
 
   ngOnInit() {
-    this.config.maxHeight = 450;
   }
 
   onTerms() {
